@@ -14,15 +14,24 @@ class Youtube_embed {
 		$this->is_enabled = $this->check_enabled();
 	}
 
+	/*
+	 *	Find the video ID in embed code
+	 */
 	private function parse_embed( $html ) {
 		$this->id = explode( '?', explode( 'embed/', $html )[1] )[0];
 	}
 
+	/*
+	 *	Is YouTube-support enabled?
+	 */
 	private function check_enabled() {
 		$options = get_option( 'fwe_settings' );
 		return isset( $options['fwe_enable_youtube'] );
 	}
 
+	/*
+	 *	Output embed replacement
+	 */
 	public function output() {
 		$this->get_thumbnails();
 
@@ -40,6 +49,9 @@ class Youtube_embed {
 		return $html;
 	}
 
+	/*
+	 *	Get thumbnail-urls
+	 */
 	private function get_thumbnails() {
 		$this->thumbs['huge'] = 'http://i.ytimg.com/vi/' . $this->id . '/sddefault.jpg';
 		$this->thumbs['large'] = 'http://i.ytimg.com/vi/' . $this->id . '/hqdefault.jpg';

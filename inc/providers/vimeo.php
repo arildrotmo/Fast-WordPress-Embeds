@@ -14,15 +14,24 @@ class Vimeo_embed {
 		$this->is_enabled = $this->check_enabled();
 	}
 
+	/*
+	 *	Find the video ID in embed code
+	 */
 	private function parse_embed( $html ) {
 		$this->id = explode( '"', explode( 'video/', $html )[1] )[0];
 	}
 
+	/*
+	 *	Is Vimeo-support enabled?
+	 */
 	private function check_enabled() {
 		$options = get_option( 'fwe_settings' );
 		return isset( $options['fwe_enable_vimeo'] );
 	}
 
+	/*
+	 *	Output embed replacement
+	 */
 	public function output() {
 		$this->get_thumbnails();
 
@@ -39,6 +48,9 @@ class Vimeo_embed {
 		return $html;
 	}
 
+	/*
+	 *	Get thumbnail-urls
+	 */
 	private function get_thumbnails() {
 		$url = 'http://vimeo.com/api/v2/video/'.$this->id.'.php';
 		$contents = @file_get_contents( $url );
@@ -46,8 +58,6 @@ class Vimeo_embed {
 		$this->thumbs['large'] = $array[0]['thumbnail_large'];
 		$this->thumbs['huge'] = substr( $this->thumbs['large'], 0, strpos( $this->thumbs['large'], "_" ) ) . "_1280.jpg";
 		$this->thumbs['small'] = substr( $this->thumbs['large'], 0, strpos( $this->thumbs['large'], "_" ) ) . "_320.jpg";
-
-		// Make this an array
 	}
 
 }

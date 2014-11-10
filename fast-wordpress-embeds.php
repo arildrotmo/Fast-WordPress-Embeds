@@ -24,6 +24,7 @@ function fwe_replaceembeds( $embedhtml ) {
     return $embedhtml;
   }
 
+  // Load inline styles and scripts only once.
   static $styles_scripts = FALSE;
 
   if( ! $styles_scripts ) {
@@ -40,14 +41,19 @@ function fwe_replaceembeds( $embedhtml ) {
   return $output . $fwe_embed->output();
 }
 
+
+
+/*
+ *  Validate the preferred width against a regex for CSS length.
+ *  Attempts to return a guess if its not valid.
+ */
+
 function cleanWidth($w) {
+
   $pattern = "/^(auto|0)$|^[+-]?[0-9]+\.?([0-9]+)?( )?(px|rem|em|vh|vw|vmin|vmax|ex|ch|%|in|cm|mm|pt|pc|mozmm)$/";
 
   if( preg_match( $pattern, $w, $m ) == 1 ) {
-    $width = $m[0];
-    $val = $m[1];
-    $unit = $m[3];
-    return $width;
+    return $m[0];
   }
   else {
     $length = preg_replace( "/[^0-9]/", "", $w );

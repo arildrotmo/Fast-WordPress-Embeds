@@ -20,15 +20,24 @@ class Wordpresstv_embed {
 		$this->is_enabled = $this->check_enabled();
 	}
 
+	/*
+	 *	Find the video ID in embed code
+	 */
 	private function parse_embed( $html ) {
 		$this->id = explode( '"', explode( 'v.wordpress.com/', $html )[1] )[0];
 	}
 
+	/*
+	 *	Is wordpress.tv-support enabled?
+	 */
 	private function check_enabled() {
 		$options = get_option( 'fwe_settings' );
 		return isset( $options['fwe_enable_wordpresstv'] );
 	}
 
+	/*
+	 *	Output embed replacement
+	 */
 	public function output() {
 		$this->get_thumbnails();
 
@@ -43,6 +52,9 @@ class Wordpresstv_embed {
 		return $html;
 	}
 
+	/*
+	 *	Get thumbnail-urls
+	 */
 	private function get_thumbnails() {
 		$this->thumbs['huge'] = site_url() . '/wp-content/plugins/fast-wordpress-embeds/assets/wptv.png';
 	}
