@@ -7,7 +7,7 @@ Stable tag: 0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin will discover your embedded videos from YouTube and Vimeo, and replace them with a clickable thumbnail and a play button. Also works without Javascript, the thumbnail is then an external link to the video.
+This plugin will discover your embedded videos from YouTube and Vimeo, and replace them with a clickable thumbnail and a play button. Does NOT depend on jQuery. Also works without Javascript, the thumbnail is then an external link to the video.
 
 == Installation ==
 
@@ -16,14 +16,6 @@ Install from WordPress "Plugins|Add New" screen, or manually:
 1. Upload the zip-file and unzip it in the /wp-content/plugins/ directory
 2. Activate the plugin through the "Plugins" menu in WordPress
 3. Go to Settings -> Fast WordPress Embeds and enable the video embeds you want to load fast.
-
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
 
 == Frequently Asked Questions ==
 

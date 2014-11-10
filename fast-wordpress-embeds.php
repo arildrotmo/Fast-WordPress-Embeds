@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Fast WordPress Embeds
 	Plugin URI: http://www.github.com/arildrotmo/fast-wordpress-embeds
-	Description: This plugin will discover your embedded videos from YouTube and Vimeo, and replace them with a clickable thumbnail and a play button. Also works without Javascript, the thumbnail is then an external link to the video.
+	Description: This plugin will discover your embedded videos from YouTube and Vimeo, and replace them with a clickable thumbnail and a play button. Does NOT depend on jQuery. Also works without Javascript, the thumbnail is then an external link to the video.
 	Author: Arild Rotmo
 	Author URI: http://www.arildrotmo.com
   License: GPL2
