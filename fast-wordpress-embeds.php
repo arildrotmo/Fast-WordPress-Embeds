@@ -18,6 +18,7 @@ require( 'inc/fwe_embed.php' );
 
 function fwe_replaceembeds( $embedhtml ) {
   $fwe_embed = new Fwe_embed( $embedhtml );
+  $op = get_option( 'fwe_settings' );
 
   if ( empty( $embedhtml ) || ! is_string( $embedhtml ) || ! $fwe_embed->data ) {
     return $embedhtml;
@@ -27,12 +28,35 @@ function fwe_replaceembeds( $embedhtml ) {
 
   if( ! $styles_scripts ) {
     add_action( 'wp_footer', array( $fwe_embed, 'fwe_inline_script_footer' ) );
-    $output = '<style>' . file_get_contents( plugin_dir_url ( __FILE__ ) . 'css/fwe_embed.css' ) . '</style>';
+    $output = '<style>';
+
+    // User-defined width :
+    $output .= '.fwe_embed{width:' . cleanWidth($op['fwe_default_width']) . '}';
+    $output .= file_get_contents( plugin_dir_url ( __FILE__ ) . 'css/fwe_embed.css' ) . '</style>';
     $styles_scripts = TRUE;
   }
   else $output = "";
 
   return $output . $fwe_embed->output();
+}
+
+function cleanWidth($w) {
+  $pattern = "/^(auto|0)$|^[+-]?[0-9]+\.?([0-9]+)?( )?(px|rem|em|vh|vw|vmin|vmax|ex|ch|%|in|cm|mm|pt|pc|mozmm)$/";
+
+  if( preg_match( $pattern, $w, $m ) == 1 ) {
+    $width = $m[0];
+    $val = $m[1];
+    $unit = $m[3];
+    return $width;
+  }
+  else {
+    $length = preg_replace( "/[^0-9]/", "", $w );
+    if( $length !== "" ) {
+      return $length . "px";
+    }
+    else return "300px";
+  }
+  
 }
 
 

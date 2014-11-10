@@ -28,6 +28,18 @@ function fwe_settings_init() {
 	$option_values = get_option( 'fwe_settings' );
 
 	add_settings_field(
+		'fwe_default_width', 
+		__( 'Default width', 'fwe' ), 
+		'fwe_default_width_render', 
+		'pluginPage', 
+		'fwe_pluginPage_section',
+		array(
+			'label_for' => 'default_width',
+			'value' => isset( $option_values['fwe_default_width'] ) ? $option_values['fwe_default_width'] : "300px"
+		)
+	);
+
+	add_settings_field(
 		'fwe_enable_youtube', 
 		__( 'YouTube', 'fwe' ), 
 		'fwe_enable_youtube_render', 
@@ -66,6 +78,12 @@ function fwe_settings_init() {
 
 }
 
+
+function fwe_default_width_render( $args ) {
+	?>
+	<input type="text" value="<?php echo $args['value'] ?>" name="fwe_settings[fwe_default_width]" id="<?php echo $args['label_for'] ?>">
+	<?php	
+}
 
 function fwe_enable_youtube_render( $args ) {
 	?>
