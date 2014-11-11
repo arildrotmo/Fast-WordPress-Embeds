@@ -7,4 +7,4 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 delete_option( 'fwe_settings' );
 
 // Multisite
-delete_site_option( $option_name );
+delete_site_option( 'fwe_settings' );
