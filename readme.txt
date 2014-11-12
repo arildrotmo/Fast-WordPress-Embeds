@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Fast WordPress Embeds ===
 Contributors: arildrotmo
 Tags: embed, performance, youtube, vimeo
 Requires at least: 3.0.1

@@ -1,4 +1,4 @@
-### Plugin Name
+### Fast WordPress Embeds
 
 Contributors: arildrotmo  
 Tags: embed, performance, youtube, vimeo  
