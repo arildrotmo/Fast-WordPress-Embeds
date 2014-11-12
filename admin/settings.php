@@ -51,7 +51,9 @@ function fwe_settings_init() {
 		'fwe_pluginPage_section',
 		array(
 			'label_for' => 'fwe_enable_youtube',
-			'value' => isset( $option_values['fwe_enable_youtube'] ) ? 1 : 0
+			'value' => isset( $option_values['fwe_enable_youtube'] ) ? 1 : 0,
+			'labelwidth' => "Default width for YouTube",
+			'defaultwidth' => isset( $option_values['fwe_youtube_width'] ) ? $option_values['fwe_youtube_width'] : "300px"
 		)
 	);
 
@@ -63,7 +65,9 @@ function fwe_settings_init() {
 		'fwe_pluginPage_section',
 		array(
 			'label_for' => 'fwe_enable_vimeo',
-			'value' => isset( $option_values['fwe_enable_vimeo'] ) ? 1 : 0
+			'value' => isset( $option_values['fwe_enable_vimeo'] ) ? 1 : 0,
+			'labelwidth' => "Default width for Vimeo",
+			'defaultwidth' => isset( $option_values['fwe_vimeo_width'] ) ? $option_values['fwe_vimeo_width'] : "300px"
 		)
 	);
 
@@ -76,7 +80,9 @@ function fwe_settings_init() {
 	// 	'fwe_pluginPage_section',
 	// 	array(
 	// 		'label_for' => 'fwe_enable_wordpresstv',
-	// 		'value' => isset( $option_values['fwe_enable_wordpresstv'] ) ? 1 : 0
+	// 		'value' => isset( $option_values['fwe_enable_wordpresstv'] ) ? 1 : 0,
+	//		'labelwidth' => "Default width for wordpress.tv",
+	//		'defaultwidth' => isset( $option_values['fwe_wordpresstv_width'] ) ? $option_values['fwe_wordpresstv_width'] : "300px"
 	// 	)
 	// );
 
@@ -92,12 +98,16 @@ function fwe_default_width_render( $args ) {
 function fwe_enable_youtube_render( $args ) {
 	?>
 	<input type="checkbox" value="1" <?php checked( $args['value'], 1 ) ?> name="fwe_settings[fwe_enable_youtube]" id="<?php echo $args['label_for'] ?>">
+	<label for="youtubewidth"><?php echo $args['labelwidth'] ?></label>
+	<input type="text" value="<?php echo $args['defaultwidth'] ?>" name="fwe_settings[fwe_youtube_width]" id="youtubewidth">
 	<?php
 }
 
 function fwe_enable_vimeo_render( $args ) {
 	?>
 	<input type="checkbox" value="1" <?php checked( $args['value'], 1 ) ?> name="fwe_settings[fwe_enable_vimeo]" id="<?php echo $args['label_for'] ?>">
+	<label for="vimeowidth"><?php echo $args['labelwidth'] ?></label>
+	<input type="text" value="<?php echo $args['defaultwidth'] ?>" name="fwe_settings[fwe_vimeo_width]" id="vimeowidth">
 	<?php
 }
 
@@ -105,6 +115,8 @@ function fwe_enable_vimeo_render( $args ) {
 function fwe_enable_wordpresstv_render( $args ) {
 	?>
 	<input type="checkbox" value="1" <?php checked( $args['value'], 1 ) ?> name="fwe_settings[fwe_enable_wordpresstv]" id="<?php echo $args['label_for'] ?>">
+	<label for="wordpresstvwidth"><?php echo $args['labelwidth'] ?></label>
+	<input type="text" value="<?php echo $args['defaultwidth'] ?>" name="fwe_settings[fwe_vimeo_width]" id="wordpresstvwidth">
 	<?php
 }
 

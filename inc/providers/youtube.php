@@ -30,12 +30,21 @@ class Youtube_embed {
 	}
 
 	/*
+	 *	Is default width set?
+	 */
+	public function default_width() {
+		$options = get_option( 'fwe_settings' );
+		return $options['fwe_youtube_width'];
+	}
+
+	/*
 	 *	Output embed replacement
 	 */
 	public function output() {
 		$this->get_thumbnails();
 
 		$html = '<noscript><a href="https://www.youtube.com/watch?v=' . $this->id . '" target="_blank"></noscript>';
+
 		$html .= '<img ';
 		$html .= 'sizes="(max-width: 640px) 100vw, 33vw" ';
 		$html .= 'srcset="';

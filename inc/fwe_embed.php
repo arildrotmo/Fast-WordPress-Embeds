@@ -34,7 +34,9 @@ class Fwe_embed {
   public function output() {
     if( ! $this->data->is_enabled ) return $this->html;
 
-    $output = '<div class="fwe_embed fwe_embed-' . $this->data->type . ' fwe_embed-' . $this->data->site . '" id="' . $this->data->id . '">';
+    $output = '<style>.fwe_embed-' . $this->data->site  . '{width:' . $this->data->default_width() . '}</style>';
+
+    $output .= '<div class="fwe_embed fwe_embed-' . $this->data->type . ' fwe_embed-' . $this->data->site . '" id="' . $this->data->id . '">';
 
     $output .= $this->data->output();
 

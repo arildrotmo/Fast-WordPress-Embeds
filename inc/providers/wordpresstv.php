@@ -36,6 +36,14 @@ class Wordpresstv_embed {
 	}
 
 	/*
+	 *	Is default width set?
+	 */
+	public function default_width() {
+		$options = get_option( 'fwe_settings' );
+		return $options['fwe_wordpresstv_width'];
+	}
+
+	/*
 	 *	Output embed replacement
 	 */
 	public function output() {

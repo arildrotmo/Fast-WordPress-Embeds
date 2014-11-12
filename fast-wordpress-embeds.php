@@ -16,6 +16,10 @@
 
 require( 'inc/fwe_embed.php' );
 
+// Add embed-support to text widgets
+add_filter( 'widget_text', array( $wp_embed, 'run_shortcode' ), 8 );
+add_filter( 'widget_text', array( $wp_embed, 'autoembed'), 8 );
+
 function fwe_replaceembeds( $embedhtml ) {
   $fwe_embed = new Fwe_embed( $embedhtml );
   $op = get_option( 'fwe_settings' );
@@ -33,6 +37,7 @@ function fwe_replaceembeds( $embedhtml ) {
 
     // User-defined width :
     $output .= '.fwe_embed{width:' . cleanWidth($op['fwe_default_width']) . '}';
+    
     $output .= file_get_contents( plugin_dir_url ( __FILE__ ) . 'css/fwe_embed.css' ) . '</style>';
     $styles_scripts = TRUE;
   }
