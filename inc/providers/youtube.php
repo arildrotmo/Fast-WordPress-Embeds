@@ -43,17 +43,15 @@ class Youtube_embed {
 	public function output() {
 		$this->get_thumbnails();
 
-		$html = '<noscript><a href="https://www.youtube.com/watch?v=' . $this->id . '" target="_blank"></noscript>';
+		$img = '<img sizes="(max-width: 640px) 100vw, 33vw" srcset="';
+		$img .= $this->thumbs['huge'] . ' 640w, ';
+		$img .= $this->thumbs['large'] . ' 480w, ';
+		$img .= $this->thumbs['small'] . ' 320w" ';
+		$img .= 'src="' . $this->thumbs['small'] . '" alt="YouTube thumbnail"';
 
-		$html .= '<img ';
-		$html .= 'sizes="(max-width: 640px) 100vw, 33vw" ';
-		$html .= 'srcset="';
+		$html = '<noscript><a href="https://www.youtube.com/watch?v=' . $this->id . '" target="_blank">' . $img . '></a></noscript>';
 
-		$html .= $this->thumbs['huge'] . ' 640w, ';
-		$html .= $this->thumbs['large'] . ' 480w, ';
-		$html .= $this->thumbs['small'] . ' 320w" ';
-		$html .= 'src="' . $this->thumbs['small'] . '" alt="YouTube thumbnail">';
-		$html .= '<noscript></a></noscript>';
+		$html .= $img . ' style="display: none">';
 
 		return $html;
 	}

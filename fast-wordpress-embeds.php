@@ -17,6 +17,7 @@
 require( 'inc/fwe_embed.php' );
 
 // Add embed-support to text widgets
+global $wp_embed;
 add_filter( 'widget_text', array( $wp_embed, 'run_shortcode' ), 8 );
 add_filter( 'widget_text', array( $wp_embed, 'autoembed'), 8 );
 
@@ -31,43 +32,11 @@ function fwe_replaceembeds( $embedhtml ) {
   // Load inline styles and scripts only once.
   static $styles_scripts = FALSE;
 
-  if( ! $styles_scripts ) {
-    add_action( 'wp_footer', array( $fwe_embed, 'fwe_inline_script_footer' ) );
-    $output = '<style>';
+  $output = $fwe_embed->output( $styles_scripts );
 
-    // User-defined width :
-    $output .= '.fwe_embed{width:' . cleanWidth($op['fwe_default_width']) . '}';
-    
-    $output .= file_get_contents( plugin_dir_url ( __FILE__ ) . 'css/fwe_embed.css' ) . '</style>';
-    $styles_scripts = TRUE;
-  }
-  else $output = "";
+  $styles_scripts = TRUE;
 
-  return $output . $fwe_embed->output();
-}
-
-
-
-/*
- *  Validate the preferred width against a regex for CSS length.
- *  Attempts to return a guess if its not valid.
- */
-
-function cleanWidth($w) {
-
-  $pattern = "/^(auto|0)$|^[+-]?[0-9]+\.?([0-9]+)?( )?(px|rem|em|vh|vw|vmin|vmax|ex|ch|%|in|cm|mm|pt|pc|mozmm)$/";
-
-  if( preg_match( $pattern, $w, $m ) == 1 ) {
-    return $m[0];
-  }
-  else {
-    $length = preg_replace( "/[^0-9]/", "", $w );
-    if( $length !== "" ) {
-      return $length . "px";
-    }
-    else return "300px";
-  }
-  
+  return $output;
 }
 
 

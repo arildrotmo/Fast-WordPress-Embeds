@@ -16,7 +16,9 @@ function fwe_settings_init() {
 	$fwe_defaults = array(
 		'fwe_default_width' => '300px',
 		'fwe_enable_youtube' => 1,
-		'fwe_enable_vimeo' => 1
+		'fwe_enable_vimeo' => 1,
+		'fwe_youtube_width' => '300px',
+		'fwe_vimeo_width' => '300px'
 	);
 	if( ! get_option( 'fwe_settings' ) ) {
 		update_option( 'fwe_settings', $fwe_defaults);

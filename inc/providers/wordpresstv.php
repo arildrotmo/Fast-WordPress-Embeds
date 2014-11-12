@@ -49,13 +49,15 @@ class Wordpresstv_embed {
 	public function output() {
 		$this->get_thumbnails();
 
-		$html = '<noscript><a href="//v.wordpress.com/' . $this->id . '" target="_blank"></noscript>';
-		$html .= '<img ';
-		$html .= 'sizes="(max-width: 640px) 100vw, 33vw" ';
-		$html .= 'srcset="';
-		$html .= $this->thumbs['huge'] . ' 420w" ';
-		$html .= 'src="' . $this->thumbs['huge'] . '" alt="wordpress.tv thumbnail">';
-		$html .= '<noscript></a></noscript>';
+		$img = '<img ';
+		$img .= 'sizes="(max-width: 640px) 100vw, 33vw" ';
+		$img .= 'srcset="';
+		$img .= $this->thumbs['huge'] . ' 420w" ';
+		$img .= 'src="' . $this->thumbs['huge'] . '" alt="wordpress.tv thumbnail"';
+
+		$html = '<noscript><a href="//v.wordpress.com/' . $this->id . '" target="_blank">' . $img . '></a></noscript>';
+		
+		$html .= $img . ' style="display: none;">';
 
 		return $html;
 	}

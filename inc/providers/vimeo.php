@@ -43,15 +43,15 @@ class Vimeo_embed {
 	public function output() {
 		$this->get_thumbnails();
 
-		$html = '<noscript><a href="https://vimeo.com/' . $this->id . '" target="_blank"></noscript>';
-		$html .= '<img ';
-		$html .= 'sizes="(max-width: 640px) 100vw, 33vw" ';
-		$html .= 'srcset="';
-		$html .= $this->thumbs['huge'] . ' 1280w, ';
-		$html .= $this->thumbs['large'] . ' 640w, ';
-		$html .= $this->thumbs['small'] . ' 320w" ';
-		$html .= 'src="'. $this->thumbs['small'] .'" alt="Vimeo thumbnail">';
-		$html .= '<noscript></a></noscript>';
+		$img = '<img sizes="(max-width: 640px) 100vw, 33vw" srcset="';
+		$img .= $this->thumbs['huge'] . ' 1280w, ';
+		$img .= $this->thumbs['large'] . ' 640w, ';
+		$img .= $this->thumbs['small'] . ' 320w" ';
+		$img .= 'src="'. $this->thumbs['small'] .'" alt="Vimeo thumbnail"';
+
+		$html = '<noscript><a href="https://vimeo.com/' . $this->id . '" target="_blank">' . $img . '></a></noscript>';
+		
+		$html .= $img . ' style="display: none">';
 
 		return $html;
 	}
