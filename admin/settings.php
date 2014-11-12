@@ -8,16 +8,20 @@ function fwe_add_admin_menu() {
 	add_options_page( 'Fast WordPress Embeds', 'Fast WordPress Embeds', 'manage_options', 'fast_wordpress_embeds', 'fast_wordpress_embeds_options_page' );
 }
 
-function fwe_settings_exist() {
-	if( false == get_option( 'fast_wordpress_embeds_settings' ) ) {
-		add_option( 'fast_wordpress_embeds_settings' );
-	}
-}
-
 
 function fwe_settings_init() {
 	register_setting( 'pluginPage', 'fwe_settings' );
 
+	// default values
+	$fwe_defaults = array(
+		'fwe_default_width' => '300px',
+		'fwe_enable_youtube' => 1,
+		'fwe_enable_vimeo' => 1
+	);
+	if( ! get_option( 'fwe_settings' ) ) {
+		update_option( 'fwe_settings', $fwe_defaults);
+	}
+	
 	add_settings_section(
 		'fwe_pluginPage_section', 
 		__( 'Enable or disable embed providers', 'fwe' ), 

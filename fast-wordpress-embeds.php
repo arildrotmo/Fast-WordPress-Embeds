@@ -74,3 +74,17 @@ add_action( 'wp_head', 'fwe_inline_script_head' );
 add_filter( 'embed_oembed_html',  'fwe_replaceembeds' );
 
 require ( 'admin/settings.php' );
+
+
+/*
+ *  Deactivation cleanup
+ */
+function fwe_deactivate() {
+  unregister_setting( 'pluginPage', 'fwe_settings' );
+  delete_option( 'fwe_settings' );
+
+  // Multisite
+  delete_site_option( 'fwe_settings' );
+}
+
+register_deactivation_hook( __FILE__, 'fwe_deactivate' );
