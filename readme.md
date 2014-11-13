@@ -1,3 +1,5 @@
+# FUNCTIONAL, BUT UNFINISHED AND UNTESTED
+
 ### Fast WordPress Embeds
 
 Contributors: arildrotmo  
@@ -7,8 +9,6 @@ Tested up to: 4.0
 Stable tag: 0.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
-
-# UNFINISHED AND UNTESTED
 
 This plugin will discover your embedded videos from YouTube and Vimeo, and replace them with a clickable thumbnail and a play button. Does NOT depend on jQuery. Also works without Javascript, the thumbnail is then an external link to the video. Uses <img sizes/srcset> for responsive images.
 

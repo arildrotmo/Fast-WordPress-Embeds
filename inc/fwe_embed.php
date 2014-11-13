@@ -33,6 +33,8 @@ class Fwe_embed {
 
   public function output( $styles_scripts ) {
     if( ! $this->data->is_enabled ) return $this->html;
+    
+    $op = get_option( 'fwe_settings' );
 
     $output = "";
 
@@ -42,20 +44,23 @@ class Fwe_embed {
       $output .= '<style>';
 
       // User-defined width :
-      $op = get_option( 'fwe_settings' );
       $output .= '.fwe_embed{width:' . $this->cleanWidth( $op['fwe_default_width'] ) . '}';
       $output .= file_get_contents( plugins_url () . '/fast-wordpress-embeds/css/fwe_embed.css' ) . '</style>';
     }
 
     $output .= '<div class="fwe_embed fwe_embed-' . $this->data->type . ' fwe_embed-' . $this->data->site . '" id="' . $this->data->id . '">';
-
     $output .= $this->data->output();
 
-    if( $this->data->type == "video" ) $output .= '<div class="fwe-play"></div>';
+    if( $this->data->type == "video" ) {
+      $output .= '<div class="fwe-play"></div>';
+    }
+
     $output .= '</div>';
 
-    $output .= '<style>.fwe_embed-' . $this->data->site  . '{width:' . $this->data->default_width() . '}</style>';
-
+    if( $this->data->default_width() !== $op['fwe_default_width'] ) {
+      $output .= '<style>.fwe_embed-' . $this->data->site  . '{width:' . $this->cleanWidth( $this->data->default_width() ) . '}</style>';
+    }
+    
     return $output;
   }
 
